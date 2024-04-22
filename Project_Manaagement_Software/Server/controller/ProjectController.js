@@ -11,23 +11,27 @@ async function ShowProjects(req, res) {
         // Projects for Super Admin
         if (role === "Super Admin") {
             const data = await Projects.findAll({
+                include: [{ model: Teams, attributes: ['user_id'] }],
+                // include:Projects,
                 where: { created_by: id }
             });
+
 
             return res.status(200).json({ data });
         }
         // Projects for Manager
         else if (role === "Manager") {
             const data = await Projects.findAll({
+                include: [{ model: Teams, attributes: ['user_id'] }],
                 attributes: ['project_id', 'project_name', 'project_details', 'created_by', 'createdAt'],
                 where: { manager_id: id }
             });
-
             return res.status(200).json({ data });
         }
         // Projects for Employee
         else if (role === "Employee") {
             const data = await Teams.findAll({
+                include: [{ model: Teams, attributes: ['user_id'] }],
                 attributes: ['project_id'],
                 where: { user_id: id }
             });
@@ -44,16 +48,17 @@ async function ShowProjects(req, res) {
 }
 
 
-async function CreateProject(req, res){
+async function CreateProject(req, res) {
     const { id, manager_id, project_name, project_details, role } = req.body;
     const newProject = await Projects.create({ manager_id: manager_id, project_name: project_name, project_details: project_details, created_by: id, updated_by: id, createdAt: new Date(), updatedAt: new Date() });
 
     if (newProject) {
-        res.status(200).json({ newProject });
+        res.status(200).json({ message:"New Project Created",newProject });
     }
     else { res.send("Error in creating project"); }
 
 }
+
 async function UpdateProject(req, res) {
     const { project_id, project_name, project_details, user_id } = req.body;
     let response = await Projects.update({ project_name: project_name, project_details: project_details, updated_by: user_id, updatedAt: new Date() }, {
@@ -67,4 +72,17 @@ async function UpdateProject(req, res) {
     else { res.send("Error in updating the project"); }
 }
 
-module.exports = {ShowProjects,CreateProject,UpdateProject};
+async function Managers(req, res) {
+    let response = await Users.findAll({
+        attributes: ['name'],
+        where: {
+            role: 'Manager'
+        }
+    });
+    if (response) {
+        res.status(200).json({ response });
+    }
+    else { res.send("Error in updating the project"); }
+}
+
+module.exports = { ShowProjects, CreateProject, UpdateProject, Managers };

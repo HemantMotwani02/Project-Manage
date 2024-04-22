@@ -1,13 +1,13 @@
 import React from 'react';
 
 function ProjectDetails(props) {
-  
+
 
   return (
 
     <>
       {/* <h4>Project Details</h4> */}
-      <div style={{ width:'80vw',borderRadius: '0.6em', backgroundColor: '#E0F1FD', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '20px' }}>
+      <div style={{ width: '80vw', borderRadius: '0.6em', backgroundColor: '#E0F1FD', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '20px' }}>
 
 
         {/*Project Details*/}

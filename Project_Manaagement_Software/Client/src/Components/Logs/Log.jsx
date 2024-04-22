@@ -1,13 +1,13 @@
+import Axios from 'axios';
 import { MDBBadge } from 'mdb-react-ui-kit';
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
 
 
 
 
-function Log(props) {
+function Log(props,{parentfunction}) {
     const [color, setColor] = useState('');
-    const [updated, setUpdated] = useState(false);
+    
 
     useEffect(() => {
         switch (props.status) {
@@ -33,7 +33,7 @@ function Log(props) {
             .then(response => {
                 if(response.message ==='Log Status updated')
                 {
-                    setUpdated(true);
+                    parentfunction();
                     // setColor(status === 'Approved' ? 'success' : 'danger');
                 }
             })

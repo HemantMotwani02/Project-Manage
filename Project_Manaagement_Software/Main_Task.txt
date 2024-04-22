@@ -1,5 +1,5 @@
  - Join
- - Sidebar UI + Rendering 
+ - Sidebar UI + Rendering
  - Log Page Rendering
- - Connection Setup 
+ - Connection Setup
  - Conditional Rendering

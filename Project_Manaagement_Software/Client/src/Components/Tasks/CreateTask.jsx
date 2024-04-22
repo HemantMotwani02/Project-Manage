@@ -19,8 +19,10 @@ function CreateTask(props) {
                 project_id: props.project_id
             };
 
-            const response = await Axios.post('http://127.0.0.1:8000/task/CreateTask',taskCreateData,{ headers: {Authorization: `Bearer ${token}`}});
+            const response = await Axios.post('http://127.0.0.1:8000/task/CreateTask', taskCreateData, { headers: { Authorization: `Bearer ${token}` } });
+
             console.log(response.data);
+            if (response.message === "Task Created") { alert("Task Created"); }
         } catch (error) {
             console.error('Error creating task:', error);
             // Handle error (e.g., display an error message to the user)
@@ -51,7 +53,7 @@ function CreateTask(props) {
     }
 
     return (
-        <div className="login-page" style={{ position: "fixed",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}}>
+        <div className="login-page" style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
             <div className="form" style={{ border: '1px solid grey' }}>
                 <h3 style={{ margin: '0 0 30px 0' }}>Task Form</h3>
                 <form className="login-form">

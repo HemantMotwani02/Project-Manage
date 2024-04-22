@@ -38,7 +38,7 @@ function ProjectTitle(props) {
 
     return (
         <>
-            <div style={{ width: '80vw', borderRadius: '0.8em', backgroundColor: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '30px ', }} >
+            <div style={{ width: '80vw', borderRadius: '0.8em', backgroundColor: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '100px 10px 20px 10px ' }} >
                 {/*Project Details*/}
                 <div style={{ margin: '0 0 25px 0', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '65vw' }}>
 

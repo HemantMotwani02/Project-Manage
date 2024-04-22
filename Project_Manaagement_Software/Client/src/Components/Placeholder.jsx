@@ -1,10 +1,10 @@
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 function Placeholder() {
     return (
         <>
 
-            <div role="status" class="max-w-md p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700" style={{height:'70vh',border:"1px solid red"}}>
+            <div role="status" class="max-w-md p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700" style={{height:'70vh',border:"1px solid red",width:"80vw"}}>
                 <div class="flex items-center justify-between">
                     <div>
                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>

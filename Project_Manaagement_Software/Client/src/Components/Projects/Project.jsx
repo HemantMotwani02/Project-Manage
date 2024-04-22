@@ -1,6 +1,6 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
 import Axios from 'axios';
-import Cookies from 'js-cookie';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
 import Placeholder from '../Placeholder';
@@ -8,15 +8,18 @@ import Sidebar from '../Sidebar/Sidebar';
 import './Project.css';
 import ProjectDetails from './ProjectDetails';
 import ProjectTitle from './ProjectTitle';
-import {useLocation} from 'react-router-dom';
 
 const Task = lazy(() => import('../Tasks/Task'));
 
 function Project(props) {
-    const token = Cookies.get('token');
     const [projects, setProjects] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [selectedProjectId, setSelectedProjectId] = useState(null);
+
+    const handleProjectSelect = (projectId) => {
+        setSelectedProjectId(projectId);
+    };
 
     const location = useLocation();
     const userData = location.state.userData;
@@ -31,6 +34,8 @@ function Project(props) {
                     }
                 });
                 setProjects(response.data.data);
+                setMembers(response.data.data.teams)
+                //console.log(response.data.data); .teams array
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching project data:', error);
@@ -38,6 +43,7 @@ function Project(props) {
         }
         fetchData();
     }, []);
+
 
     async function showTasks() {
         const token = localStorage.getItem('token');
@@ -49,6 +55,7 @@ function Project(props) {
                 },
             });
             setTasks(response.data.tasks);
+            //console.log(response.data.tasks); user object
         } catch (error) {
             console.error('Error fetching task data:', error);
         }
@@ -56,9 +63,9 @@ function Project(props) {
 
     return (
         <div id='projectpage'>
-            
+
             <div className="main-content">
-                <Navbar name={userData.name} email={userData.email} role={userData.role}/>
+                <Navbar name={userData.name} email={userData.email} role={userData.role} />
                 {projects.length > 0 ? (
                     <>
                         <ProjectTitle project_id={projects[0].project_id} user_id={projects[0].created_by} title={projects[0].project_name} />
@@ -67,26 +74,29 @@ function Project(props) {
                             time={projects[0].createdAt}
                             by={projects[0].created_by}
                         />
-                        <button onClick={showTasks} >Show Tasks</button>
-                        {tasks.map(task => (
-                            <Suspense fallback={<Placeholder />} key={task.task_id}>
-                                <Task
-                                    task_id={task.task_id}
-                                    title={task.task_name}
-                                    description={task.task_details}
-                                    Time={task.createdAt}
-                                    CreatedBy={task.created_by}
-                                    projectId={task.project_id}
-                                />
-                            </Suspense>
-                        ))}
+                        <button onClick={showTasks} style={{ marginTop: "15px" }}>Show Tasks</button>
+                        <div style={{ overflow: 'auto', width: "80vw", height: "40vh" }}>
+                            {tasks.map(task => (
+                                <Suspense fallback={<Placeholder />} key={task.task_id}>
+                                    <Task
+                                        task_id={task.task_id}
+                                        title={task.task_name}
+                                        description={task.task_details}
+                                        Time={task.createdAt}
+                                        CreatedBy={task.user.name}
+                                        projectId={task.project_id}
+                                    />
+
+                                </Suspense>
+                            ))}
+                        </div>
                     </>
                 ) : (
                     <Placeholder />
                 )}
                 <Footer className="footer" />
             </div>
-            <Sidebar projects={projects} className="sidebar" />
+            <Sidebar projects={projects} className="sidebar" onProjectSelect={handleProjectSelect} />
         </div>
     );
 }

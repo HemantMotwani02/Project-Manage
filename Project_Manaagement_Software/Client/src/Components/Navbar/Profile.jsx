@@ -1,5 +1,4 @@
 import React from 'react';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 function Profile(props) {
@@ -23,10 +22,10 @@ function Profile(props) {
     return (
         <>
 
-            <div style={{ border: '1px solid red', width: '250px', height: '150px', padding: '10px', borderRadius: '0.8em', backgroundColor: "white", position: 'absolute', zIndex: '10', right: '120px',margin:"5px 0" }}>
+            <div style={{ border: '1px solid red', width: '250px', height: '200px', padding: '10px', borderRadius: '0.8em', backgroundColor: "white", position: 'absolute', zIndex: '10', right: '100px',margin:"5px 0" }}>
                 <p>{props.name}</p>
                 <p>{props.email}</p>
-                {/* <p>{props.role}</p> */}
+                <p>{props.role}</p>
                 <button style={{ backgroundColor: '#f56161' }} onClick={handleLogout}>Log out</button>
             </div>
         </>

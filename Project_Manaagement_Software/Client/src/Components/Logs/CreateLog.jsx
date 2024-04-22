@@ -16,7 +16,10 @@ function CreateLog(props) {
             user_id: 23
         }
 
-        const response = await Axios.post('http://127.0.0.1:8000/log/AddLog', LogData,{ headers: {Authorization: `Bearer ${token}`}});
+        const response = await Axios.post('http://127.0.0.1:8000/log/AddLog', LogData);
+        if (response.message === "New Log Created") {
+            alert("New Log Created");
+        }
         console.log(response.data);
     }
 
@@ -47,7 +50,7 @@ function CreateLog(props) {
 
     return (
         <>
-            <div className="login-page"  style={{ position: "fixed",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}}>
+            <div className="login-page" style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
 
                 <div className="form" style={{ border: '1px solid grey' }}>
                     <h3 style={{ margin: '0 0 30px 0' }}>Log</h3>

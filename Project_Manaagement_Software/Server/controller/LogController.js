@@ -1,11 +1,12 @@
 const db = require('../models/index');
-const Logs = db.log;
+const Logs = db.logs;
+const Tasks = db.tasks;
 
 async function AddLog(req, res) {
     const { task_id, start_time, end_time, description, user_id } = req.body;
     const newLog = await Logs.create({ task_id: task_id, start_time: start_time, end_time: end_time, description: description, status: "Pending", created_by: user_id, updated_by: user_id, createdAt: new Date(), updatedAt: new Date() });
     if (newLog) {
-        res.status(200).send("New Log Created");
+        res.status(200).json({message:"New Log Created",newLog});
     }
     else { res.send("Error in creating log"); }
 }
@@ -19,7 +20,10 @@ async function ShowLogs(req, res) {
     //     res.status(200).json({ logs });
     // }
     // else {
-        const logs = await Logs.findAll({ where: { task_id: id } });
+        const logs = await Logs.findAll({
+            // include: [{ model: Tasks, attributes: ['task_name'] }],
+            where: { task_id: id } });
+            console.log(logs);
         res.status(200).json({ logs });
     // }
 }

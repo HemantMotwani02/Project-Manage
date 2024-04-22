@@ -1,10 +1,21 @@
 import Axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function CreateProject(props) {
     let [ProjectName, setProjectName] = useState();
     let [ProjectDetails, setprojectDetails] = useState();
+    let [Managers, setManagers] = useState([]);
     let [managerId, setManagerId] = useState();
+
+    useEffect(() => {
+        async function getManagers() {
+            const response1 = await Axios.get('http://127.0.0.1:8000/project/getManagers');
+            setManagers(response1.data);
+        }
+
+        getManagers();
+    }, []);
+    console.log(Managers);
 
     async function HandleCreateProject() {
 
@@ -16,8 +27,11 @@ function CreateProject(props) {
             // user_id: 23
         }
 
-        const response = await Axios.post('http://127.0.0.1:8000/project/Createproject', ProjectData,{ headers: {Authorization: `Bearer ${token}`}});
+        const response = await Axios.post('http://127.0.0.1:8000/project/Createproject', ProjectData, { headers: { Authorization: `Bearer ${token}` } });
         console.log(response.data);
+        if (response.message === "New Project Created") {
+            alert("New Project Created");
+        }
     }
 
 

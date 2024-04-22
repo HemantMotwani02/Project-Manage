@@ -13,7 +13,7 @@ router.post('/Register', Register);
 
 
 // Delete
-router.delete('/DeleteUser',Delete);
+router.delete('/DeleteUser',verifyToken,Delete);
 
 
 module.exports = router;

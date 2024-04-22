@@ -12,7 +12,7 @@ function Header(props) {
 
     return (
         <>
-            <div style={{ width:'80vw',display: 'flex', border: '1px solid red', padding: '10px 25px',  justifyContent: "space-between", alignItems: 'center', borderRadius: '0.6em', }}>
+            <div style={{ width:'80vw',display: 'flex', border: '1px solid red', padding: '10px 25px',  justifyContent: "space-between", alignItems: 'center', borderRadius: '0.6em',position:"fixed",backgroundColor:"white",top:"20px",right:"50px" }}>
                 <div style={{ position: 'relative' }}>
                     <SearchIcon style={{ position: 'absolute', top: '5px', left: '10px' }} />
                     <input type="search" placeholder='Search Projects...' style={{ padding: '0 0 0 40px', border: '1px solid grey', borderRadius: '0.5em', height: '35px', backgroundColor: '#ECECEC', color: 'black' }} />

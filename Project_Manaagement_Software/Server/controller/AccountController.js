@@ -4,7 +4,7 @@ const validator = require('validator');
 const db = require('../models/index');
 const Users = db.users;
 
-async function Login(req, res){
+async function Login(req, res) {
     const { email, password } = req.body;
     try {
 
@@ -36,7 +36,7 @@ async function Login(req, res){
 }
 
 
-async function Register(req, res){
+async function Register(req, res) {
     const { name, email, password, role } = req.body;
     try {
         let data = await Users.findOne({
@@ -66,12 +66,15 @@ async function Register(req, res){
 
 
 async function Delete(req, res) {
-    const { user_id } = req.body;
+    const { id, role } = req.decoded;
     let removeUser = await Users.update({ deleted_at: new Date() }, {
-        where: { user_id: user_id }
+        where: { user_id: id }
     });
-    res.status(200).send("Account Deleted");
+    if (removeUser) {
+        res.status(200).json({ message: "Account Deleted" });
+    }
+    else { res.send("Error in delete"); }
 
 }
 
-module.exports = {Login,Register,Delete};
+module.exports = { Login, Register, Delete };
