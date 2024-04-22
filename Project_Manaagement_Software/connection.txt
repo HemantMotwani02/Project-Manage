@@ -1,0 +1,26 @@
+Connected
+
+Login
+Register
+Projects
+Show Tasks
+Log
+LogStatus
+CreateTask
+AddLog
+
+Pending
+
+
+Update Project
+Create Project
+Delete
+
+
+
+ - Server Structure (Done)
+ - Client Structure
+ - Client Conditional Rendering 
+ - UI Update
+ - Connection Setup
+ - Assosications

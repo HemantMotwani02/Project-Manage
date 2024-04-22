@@ -1,0 +1,7 @@
+Src -> Keep source code separate from other files and directories in the project.
+Config -> Configuration files for the application. This might include environment files, database connection settings and other configuration
+Controllers -> Responsible for handling request and response logic.
+Models -> Represent data schema of the table used in the project.
+API/Routes -> Define the endpoints of the application.
+Services -> Services encapsulate the business logic of the application. They might interact with models, controllers, and other codebase. Holds all the services for the application.
+utils -> Holds the utility functions that are used across th application.
